@@ -34,7 +34,7 @@
                                     <th>Date naissance</th>
                                     <th>Lieu naissance</th>
                                     <th>Numéro</th>
-                                    <th>Genre</th>
+                                    <th>RIB</th>
                                     <th>Nationalité</th>
                                     <th>Type</th>
                                     <th>Boursier</th>
@@ -49,7 +49,7 @@
                                         <td>{{ $etudiant->naissance }}</td>
                                         <td>{{ $etudiant->lieu }}</td>
                                         <td>{{ $etudiant->phone }}</td>
-                                        <td>{{ $etudiant->sexe }}</td>
+                                        <td>{{ $etudiant->rib }}</td>
                                         <td>{{ $etudiant->nationalite }}</td>
                                         <td>{{ $etudiant->type->lib_type }}</td>
                                         <td>{{ $etudiant->boursier }}</td>

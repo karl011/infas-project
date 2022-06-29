@@ -22,6 +22,18 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group row">
+                                <label class="col-lg-3 col-form-label">Matricule</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control @error('matricule_etd') is-invalid @enderror" name="matricule_etd" value="{{ $etudiants['matricule_etd'] }}" required
+                                    placeholder="matricule_etd">
+                                    @error('matricule_etd')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-lg-3 col-form-label">Nom</label>
                                 <div class="col-lg-9">
                                     <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" value="{{ $etudiants['nom'] }}" required
@@ -84,6 +96,9 @@
                                     @enderror
                                 </div>
                             </div>
+                            <input type="hidden" name="antenne_id" value="{{ auth()->user()->antenne->id }}">
+                        </div>
+                        <div class="col-lg-6">
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label">Email</label>
                                 <div class="col-lg-9">
@@ -96,15 +111,24 @@
                                     @enderror
                                 </div>
                             </div>
-                            <input type="hidden" name="antenne_id" value="{{ auth()->user()->antenne->id }}">
-                        </div>
-                        <div class="col-lg-6">
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label">Téléphone</label>
                                 <div class="col-lg-9">
                                     <input type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $etudiants['phone'] }}" required
                                     placeholder="Numéro de téléphone">
                                     @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label">RIB</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control @error('rib') is-invalid @enderror" name="rib" value="{{ $etudiants['rib'] }}" required
+                                    placeholder="Le rib dee l'étudiant">
+                                    @error('rib')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

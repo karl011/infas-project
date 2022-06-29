@@ -44,9 +44,10 @@ class EtudiantController extends Controller
             'lieu' => ['required', 'string'],
             'matricule_etd' => ['required', 'string'],
             'phone' => ['required', 'string', 'nullable'],
+            'rib' => ['required', 'string'],
             'nationalite' => ['required', 'string', 'nullable'],
             'sexe' => ['required', 'string', 'max:1', 'nullable'],
-            'email' => ['required', 'string', 'nullable'],
+            'email' => ['string', 'nullable'],
             'boursier' => ['required', 'string', 'max:5', 'nullable'],
             'statut' => ['required', 'string', 'max:5'],
             'type_id' => ['required', 'integer'],
@@ -106,11 +107,13 @@ class EtudiantController extends Controller
     public function update(Request $request,  $etudiant)
     {
         $etudiants = Etudiant::find($etudiant);
+        $etudiants->matricule_etd = $request->matricule_etd;
         $etudiants->nom = $request->nom;
         $etudiants->prenoms = $request->prenoms;
         $etudiants->naissance = $request->naissance;
         $etudiants->lieu = $request->lieu;
         $etudiants->phone = $request->phone;
+        $etudiants->rib = $request->rib;
         $etudiants->nationalite = $request->nationalite;
         $etudiants->sexe = $request->sexe;
         $etudiants->email = $request->email;

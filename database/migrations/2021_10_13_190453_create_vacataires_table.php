@@ -20,9 +20,9 @@ class CreateVacatairesTable extends Migration
             $table->string('matricule_vac');
             $table->date('date_naiss')->nullable();
             $table->string('phone_1', 15)->nullable();
-            $table->string('phone_2', 15)->nullable();
+            $table->string('rib', 50)->nullable();
             $table->string('sexe', 1);
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('type', 255);
             $table->string('statut', 5);
             $table->foreignId('antenne_id')->constrained()->onDelete('cascade')->onUpdate('cascade');

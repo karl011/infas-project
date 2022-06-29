@@ -93,7 +93,7 @@
                                     <div class="col-lg-9">
                                         <input type="text" class="form-control @error('email') is-invalid @enderror"
                                             name="email" value="{{ old('email') }}"
-                                            placeholder="L'adresse e-mail" required>
+                                            placeholder="L'adresse e-mail">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -102,11 +102,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Téléphone 1</label>
+                                    <label class="col-lg-3 col-form-label">Téléphone</label>
                                     <div class="col-lg-9">
                                         <input type="phone" class="form-control @error('phone_1') is-invalid @enderror"
                                             name="phone_1" value="{{ old('phone_1') }}"
-                                            placeholder="Numéro de téléphone 1">
+                                            placeholder="Numéro de téléphone">
                                         @error('phone_1')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -115,12 +115,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Téléphone 2</label>
+                                    <label class="col-lg-3 col-form-label">RIB</label>
                                     <div class="col-lg-9">
-                                        <input type="phone" class="form-control @error('phone_2') is-invalid @enderror"
-                                            name="phone_2" value="{{ old('phone_2') }}"
-                                            placeholder="Numéro de téléphone 2">
-                                        @error('phone_2')
+                                        <input type="text" class="form-control @error('rib') is-invalid @enderror"
+                                            name="rib" value="{{ old('rib') }}"
+                                            placeholder="Le rib du vacataire" required>
+                                        @error('rib')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

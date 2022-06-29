@@ -30,9 +30,9 @@ class VacataireController extends Controller
             'prenoms' => ['required', 'string', 'max:255'],
             'date_naiss' => ['date', 'nullable'],
             'phone_1' => ['string', 'max:15', 'nullable'],
-            'phone_2' => ['string', 'max:15', 'nullable'],
+            'rib' => ['string', 'required'],
             'sexe' => ['required', 'string', 'max:1'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'nullable'],
             'type' => ['required', 'string', 'max:255'],
             'statut' => ['required', 'string', 'max:5'],
             'antenne_id' => ['required', 'integer'],
@@ -42,7 +42,7 @@ class VacataireController extends Controller
         $forName = $request->prenoms; //les autres colonnes a importer obligatoirement
         $birthDate = $request->date_naiss;
         $cell1 = $request->phone_1;
-        $cell2 = $request->phone_2;
+        $cell2 = $request->rib;
         $sexe = $request->sexe;
         $mail = $request->email;
         $types = $request->type;
@@ -61,7 +61,7 @@ class VacataireController extends Controller
         $q->prenoms = $forName;
         $q->date_naiss = $birthDate;
         $q->phone_1 = $cell1;
-        $q->phone_2 = $cell2;
+        $q->rib = $cell2;
         $q->sexe = $sexe;
         $q->email = $mail;
         $q->type = $types;
@@ -74,17 +74,29 @@ class VacataireController extends Controller
         return back()->with('toast_success', 'Vacataire crée avec succès');
     }
 
+    public function edit($vacataire)
+    {
+        $vacataires = Vacataire::where('id', '=', $vacataire)->get()->first();
+
+        return view('user.vacataires.edit', compact('vacataires', 'vacataire'));
+    }
+
+    public function update(Request $request,  $vacataire)
+    {
+        $vacataires = Vacataire::find($vacataire);
+        $vacataires->matricule_vac = $request->matricule_vac;
+        $vacataires->nom = $request->nom;
+        $vacataires->prenoms = $request->prenoms;
+        $vacataires->date_naiss = $request->date_naiss;
+        $vacataires->email = $request->email;
+        $vacataires->phone_1 = $request->phone_1;
+        $vacataires->rib = $request->rib;
+        $vacataires->save();
+
+        return redirect()->route('vacataires.index')->with('toast_success', 'Les informations ont été modifiées');
+    }
+
     public function show(Vacataire $vacataire)
-    {
-        //
-    }
-
-    public function edit(Vacataire $vacataire)
-    {
-        //
-    }
-
-    public function update(Request $request, Vacataire $vacataire)
     {
         //
     }

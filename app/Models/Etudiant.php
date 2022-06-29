@@ -24,6 +24,7 @@ class Etudiant extends Model
     'lieu',
     'matricule_etd',
     'phone',
+    'rib',
     'nationalite',
     'sexe',
     'email',

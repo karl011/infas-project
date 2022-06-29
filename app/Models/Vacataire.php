@@ -18,7 +18,7 @@ class Vacataire extends Model
     'prenoms',
     'date_naiss',
     'phone_1',
-    'phone_2',
+    'rib',
     'sexe',
     'email',
     'type',

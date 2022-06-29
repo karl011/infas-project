@@ -15,13 +15,12 @@
     </li>
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true"
-            aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Paramètres</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-success py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('exercices.index') }}">Exercices</a>
                 <a class="collapse-item" href="{{ route('antennes.index') }}">Antennes</a>
@@ -33,8 +32,23 @@
             </div>
         </div>
     </li>
+    {{-- Autres paramètres --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAutres"
+            aria-expanded="true" aria-controls="collapseAutres">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <span>Autres</span>
+        </a>
+        <div id="collapseAutres" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-success py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('stats.index') }}">Statistiques finales</a>
+                <a class="collapse-item" href="{{ route('students.create') }}">Importer ou exporter</a>
+                <a class="collapse-item" href="{{ route('inscriptions.situation') }}">Etats de synthèse</a>
+            </div>
+        </div>
+    </li>
 @endcan
-<!-- Debut de la secction de lobservateur -->
+{{-- <!-- Debut de la secction de lobservateur -->
 @can('observateur')
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseObservateur"
@@ -42,28 +56,26 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>Les statistiques</span>
         </a>
-        <div id="collapseObservateur" class="collapse" aria-labelledby="headingObservateur"
-            data-parent="#accordionSidebar">
+        <div id="collapseObservateur" class="collapse" aria-labelledby="headingObservateur" data-parent="#accordionSidebar">
             <div class="bg-success py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('stats.index') }}">Statistiques finales</a>
             </div>
         </div>
     </li>
-@endcan
+@endcan --}}
 <!-- Fin observateur -->
 @can('agent-saisie')
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEtudiants" aria-expanded="true"
-            aria-controls="collapseEtudiants">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEtudiants"
+            aria-expanded="true" aria-controls="collapseEtudiants">
             <i class="fas fa-fw fa-user-graduate"></i>
             <span>Etudiants</span>
         </a>
-        <div id="collapseEtudiants" class="collapse" aria-labelledby="headingEtudiants"
-            data-parent="#accordionSidebar">
+        <div id="collapseEtudiants" class="collapse" aria-labelledby="headingEtudiants" data-parent="#accordionSidebar">
             <div class="bg-success py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('etudiants.create') }}">Nouvel Etudiant</a>
-                <a class="collapse-item" href="{{ route('etudiants.index') }}">Liste Etudiants</a>
-                <a class="collapse-item" href="{{ route('students.create') }}">Importer</a>
+                <a class="collapse-item" href="{{ route('etudiants.create') }}">Nouvel étudiant</a>
+                <a class="collapse-item" href="{{ route('etudiants.index') }}">Liste étudiants</a>
+                <a class="collapse-item" href="{{ route('students.create') }}">Importer ou exporter</a>
             </div>
         </div>
     </li>
@@ -80,16 +92,17 @@
             data-parent="#accordionSidebar">
             <div class="bg-success py-2 collapse-inner rounded">
                 @can('agent-saisie')
-                    <a class="collapse-item" href="{{ route('inscriptions.create') }}">Nouvelle Inscription</a>
-                    <a class="collapse-item" href="{{ route('inscriptions.index') }}">Etudiants Inscrit</a>
-                    <a class="collapse-item" href="{{ route('stats.consultation') }}">Les statuts des étudiants</a>
-                    <a class="collapse-item" href="{{ route('inscriptions.situation') }}">Etats de Synthèse</a>
+                    <a class="collapse-item" href="{{ route('inscriptions.create') }}">Nouvelle inscription</a>
+                    <a class="collapse-item" href="{{ route('inscriptions.index') }}">Etudiants inscrits</a>
+                    <a class="collapse-item" href="{{ route('inscriptions.situation') }}">Etats de synthèse</a>
+                    {{-- <a class="collapse-item" href="{{ route('stats.consultation') }}">Les statuts des étudiants</a> --}}
                 @endcan
                 @canany(['chef-comptable', 'agent-comptable'])
                     <a class="collapse-item" href="{{ route('inscriptions.validation') }}">Inscriptions</a>
                 @endcanany
                 @can('agent-comptable')
-                    <a class="collapse-item" href="{{ route('inscriptions.situation') }}">Etats de Synthèse</a>
+                    <a class="collapse-item" href="{{ route('inscriptions.situation') }}">Etats de synthèse</a>
+                    <a class="collapse-item" href="{{ route('stats.index') }}">Statistiques finales</a>
                 @endcan
             </div>
         </div>
@@ -98,8 +111,8 @@
 <!-- Bourses -->
 @canany(['chef-comptable', 'agent-comptable'])
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBourses" aria-expanded="true"
-            aria-controls="collapseBourses">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBourses"
+            aria-expanded="true" aria-controls="collapseBourses">
             <i class="fas fa-fw fa-user-plus"></i>
             <span>Bourses</span>
         </a>
@@ -144,8 +157,8 @@
 <!-- REGLEMENTS -->
 @canany(['chef-comptable', 'agent-comptable'])
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReglements" aria-expanded="true"
-            aria-controls="collapseReglements">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReglements"
+            aria-expanded="true" aria-controls="collapseReglements">
             <i class="fas fa-fw fa-user-plus"></i>
             <span>Dépenses</span>
         </a>
@@ -166,8 +179,8 @@
 <!-- La section de saisie de scolarité uniquement que lagent de saisie de la scolarité -->
 @can('agent-saisie')
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseScolarites" aria-expanded="true"
-            aria-controls="collapseScolarites">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseScolarites"
+            aria-expanded="true" aria-controls="collapseScolarites">
             <i class="fas fa-fw fa-user-tie"></i>
             <span>Scolarité</span>
         </a>
@@ -184,16 +197,16 @@
 <!--  Lasection de siaie de vacations uniquement que par lagent de saisie -->
 @can('agent-saisie')
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVacataires" aria-expanded="true"
-            aria-controls="collapseVacataires">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVacataires"
+            aria-expanded="true" aria-controls="collapseVacataires">
             <i class="fas fa-fw fa-user-tie"></i>
             <span>Vacataires</span>
         </a>
         <div id="collapseVacataires" class="collapse" aria-labelledby="headingVacataires"
             data-parent="#accordionSidebar">
             <div class="bg-success py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('vacataires.create') }}">Nouveau Vacataire</a>
-                <a class="collapse-item" href="{{ route('vacataires.index') }}">Liste des Vacataires</a>
+                <a class="collapse-item" href="{{ route('vacataires.create') }}">Nouveau vacataire</a>
+                <a class="collapse-item" href="{{ route('vacataires.index') }}">Liste des vacataires</a>
             </div>
         </div>
     </li>
@@ -203,16 +216,15 @@
 
 @canany(['agent-saisie', 'chef-comptable', 'agent-comptable'])
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVacations" aria-expanded="true"
-            aria-controls="collapseVacations">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVacations"
+            aria-expanded="true" aria-controls="collapseVacations">
             <i class="fas fa-money-bill"></i>
             <span>Vacations</span>
         </a>
-        <div id="collapseVacations" class="collapse" aria-labelledby="headingVacations"
-            data-parent="#accordionSidebar">
+        <div id="collapseVacations" class="collapse" aria-labelledby="headingVacations" data-parent="#accordionSidebar">
             <div class="bg-success py-2 collapse-inner rounded">
                 @can('agent-saisie')
-                    <a class="collapse-item" href="{{ route('vacations.create') }}">Nouvelle Vacation</a>
+                    <a class="collapse-item" href="{{ route('vacations.create') }}">Nouvelle vacation</a>
                     <a class="collapse-item" href="{{ route('vacations.index') }}">Vacations réalisées</a>
                 @endcan
                 @canany(['chef-comptable', 'agent-comptable'])
@@ -230,8 +242,8 @@
 @canany(['agent-saisie'])
     <!-- Nav Item - Dépenses Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepenses" aria-expanded="true"
-            aria-controls="collapseDepenses">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepenses"
+            aria-expanded="true" aria-controls="collapseDepenses">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Recettes</span>
         </a>
@@ -246,8 +258,8 @@
 
     <!-- Nav Item - Recettes Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecettes" aria-expanded="true"
-            aria-controls="collapseRecettes">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecettes"
+            aria-expanded="true" aria-controls="collapseRecettes">
             <i class="fas fa-fw fa-dollar-sign"></i>
             <span>Dépenses</span>
         </a>
@@ -294,8 +306,8 @@
 
 @canany(['agent-saisie', 'chef-comptable', 'agent-comptable'])
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRec" aria-expanded="true"
-            aria-controls="collapseRec">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRec"
+            aria-expanded="true" aria-controls="collapseRec">
             <i class="fas fa-money-bill"></i>
             <span>Recettes propores</span>
         </a>
@@ -319,13 +331,12 @@
 
 @canany(['agent-saisie', 'chef-comptable', 'agent-comptable'])
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaiements" aria-expanded="true"
-            aria-controls="collapsePaiements">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaiements"
+            aria-expanded="true" aria-controls="collapsePaiements">
             <i class="fas fa-money-bill"></i>
             <span>Paiements</span>
         </a>
-        <div id="collapsePaiements" class="collapse" aria-labelledby="headingPaiements"
-            data-parent="#accordionSidebar">
+        <div id="collapsePaiements" class="collapse" aria-labelledby="headingPaiements" data-parent="#accordionSidebar">
             <div class="bg-success py-2 collapse-inner rounded">
                 @can('agent-saisie')
                     <a class="collapse-item" href="{{ route('paiements.create') }}">Nouveau paiement</a>
