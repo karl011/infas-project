@@ -19,11 +19,10 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group row">
-                                    {{-- <label class="col-lg-3 col-form-label">Matricule</label> --}}
                                     <div class="col-lg-">
-                                        <input type="text" class="form-control" placeholder="Matricule"
-                                            name="matricule_etd" {{ old('matricule_etd') }}>
-                                        @error('matricule')
+                                        <input type="text" class="form-control" placeholder="Nom, prénoms ou matricule"
+                                            name="search" {{ old('search') }}>
+                                        @error('search')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -33,7 +32,6 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group row">
-                                    {{-- <label class="col-lg-3 col-form-label">Exercice</label> --}}
                                     <div class="col-lg-">
                                         <select class="form-control @error('exercice_id') is-invalid @enderror"
                                             name="exercice_id" value="{{ old('exercice_id') }}">
@@ -52,16 +50,51 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group row">
-                                    {{-- <label class="col-lg-3 col-form-label">FIlieres</label> --}}
+                                    <div class="col-lg-">
+                                        <select class="form-control @error('niveau_etud') is-invalid @enderror"
+                                            name="niveau_etud" value="{{ old('niveau_etud') }}">
+                                            <option selected value="" >Niveau d'etude</option>
+                                            @foreach (App\Models\Inscription::select('niveau_etud')->distinct()->get()  as $niveau)
+                                                <option value="{{ $niveau->niveau_etud }}">{{ $niveau->niveau_etud }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('niveau_etud')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group row">
                                     <div class="col-lg-">
                                         <select class="form-control @error('filiere_id') is-invalid @enderror"
                                             name="filiere_id" value="{{ old('filiere_id') }}">
-                                            <option selected disabled>Choisir une fliliere</option>
+                                            <option selected disabled>Filière</option>
                                             @foreach ($filieres as $filiere)
                                                 <option value="{{ $filiere->id }}">{{ $filiere->fil_lib }}</option>
                                             @endforeach
                                         </select>
                                         @error('filiere_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group row">
+                                    <div class="col-lg-">
+                                        <select class="form-control @error('antenne_id') is-invalid @enderror"
+                                            name="antenne_id" value="{{ old('antenne_id') }}">
+                                            <option selected disabled>Antenne</option>
+                                            @foreach (App\Models\Antenne::all() as $antenne)
+                                                <option value="{{ $antenne->id }}">{{ $antenne->ant_lib }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('antenne_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

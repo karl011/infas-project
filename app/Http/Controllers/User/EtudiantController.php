@@ -44,7 +44,7 @@ class EtudiantController extends Controller
             'lieu' => ['required', 'string'],
             'matricule_etd' => ['required', 'string'],
             'phone' => ['required', 'string', 'nullable'],
-            'rib' => ['required', 'string'],
+            'rib' => ['required_if:boursier,==,OUI', 'string', 'nullable'],
             'nationalite' => ['required', 'string', 'nullable'],
             'sexe' => ['required', 'string', 'max:1', 'nullable'],
             'email' => ['string', 'nullable'],

@@ -13,8 +13,8 @@
 
         <div class="container">
             <div class="d-sm-flex align-items-center justify-content-end mb-4">
-                <a href="{{ route('bordereaux.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"
-                    role="button"><i class="fas fa-plus fa-sm text-white-50"></i>Ajouter</a>
+                <a href="{{ route('bordereaux.create') }}"
+                    class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" role="button"><i class="fas fa-plus fa-sm text-white-50"></i>Ajouter</a>
             </div>
         </div>
 

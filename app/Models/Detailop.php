@@ -12,12 +12,13 @@ class Detailop extends Model
     use HasFactory;
 
     protected $fillable = [
-        'dop_num',
         'dop_benef',
         'dop_mont',
         'dop_objet',
         'dop_bqe_code',
         'num_cpte',
+        'guichet',
+        'rib',
         'dop_type',
         'date_reg',
         'mont_net',

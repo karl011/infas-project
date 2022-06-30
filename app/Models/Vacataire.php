@@ -31,7 +31,7 @@ class Vacataire extends Model
     return $this->belongsTo(Antenne::class);
   }
 
-  public function detailop()
+  public function detailops()
   {
     return $this->hasMany(Detailop::class);
   }

@@ -30,6 +30,8 @@
                                 <th>Vacations</th>
                                 <th>Règlements</th>
                                 <th>Recouvrements</th>
+                                <th>Bordereaux</th>
+                                <th>OP</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,6 +43,8 @@
                                 <td>{{$vacations->count()}}</td>
                                 <td>{{$reglements->count()}}</td>
                                 <td>{{$recouvrements->count()}}</td>
+                                <td>{{$bordereaux->count()}}</td>
+                                <td>{{$opaiements->count()}}</td>
                             </tr>
                         </tbody>
                     </table>

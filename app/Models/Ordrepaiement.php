@@ -42,17 +42,17 @@ class Ordrepaiement extends Model
         'plc_gst',
         'cpte_pec',
         'user_id',
-        'fournisseur_id',
+        // 'fournisseur_id',
         'exercice_id',
         'bordereau_id',
         'antenne_id',
         'banque_id'
     ];
 
-    public function fournisseur()
-    {
-        return $this->belongsTo(Fournisseur::class);
-    }
+    // public function fournisseur()
+    // {
+    //     return $this->belongsTo(Fournisseur::class);
+    // }
     public function user()
     {
         return $this->belongsTo(User::class);

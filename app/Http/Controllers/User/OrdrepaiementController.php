@@ -19,7 +19,6 @@ class OrdrepaiementController extends Controller
 {
     public function index()
     {
-        $fournissseurs = Fournisseur::get();
         $exercices = Exercice::get();
         $antennes = Antenne::all();
         $bordereaus = Bordereau::all();
@@ -28,7 +27,6 @@ class OrdrepaiementController extends Controller
 
         return view('user.paiements.index', compact(
             'ordrepaiements',
-            'fournissseurs',
             'exercices',
             'antennes',
             'bordereaus',
@@ -38,13 +36,11 @@ class OrdrepaiementController extends Controller
 
     public function create()
     {
-        $fournissseurs = Fournisseur::all();
         $exercices = Exercice::all();
         $bordereaus = Bordereau::all();
         $antennes = Antenne::all();
         $banques = Banque::all();
         return view('user.paiements.create', [
-            'fournissseurs' => $fournissseurs,
             'exercices' => $exercices,
             'bordereaus' => $bordereaus,
             'antennes' => $antennes,
@@ -63,7 +59,6 @@ class OrdrepaiementController extends Controller
             'objet' => ['string', 'max:400'],
             'mrg_code' => ['string', 'max:20'],
             'cpte_ordre' => ['string', 'max:50'],
-            'fournisseur_id' => ['integer'],
             'exercice_id' => ['integer'],
             'bordereau_id' => ['integer'],
             'banque_id' => ['integer'],
@@ -94,7 +89,7 @@ class OrdrepaiementController extends Controller
 
     public function edit($ordrepaiement)
     {
-        $fournissseurs = Fournisseur::where('id', '=', $ordrepaiement)->get()->first();
+        $ordrepaiements = Ordrepaiement::where('id', '=', $ordrepaiement)->get()->first(); //a revoir des ce soir
         $exercices = Exercice::find($ordrepaiement);
         $antennes = Antenne::find($ordrepaiement);
         $bordereaus = Bordereau::find($ordrepaiement);
@@ -125,6 +120,12 @@ class OrdrepaiementController extends Controller
 
         $ordrepaiements->save();
         return redirect()->route('paiements.index')->with('toast_success', 'L\'action effectuée avec succès');
+    }
+
+    public function show($ordrepaiement)
+    {
+        $ordrepaiements = Ordrepaiement::where('id', '=', $ordrepaiement)->first();
+        return view('user.paiements.show', compact('ordrepaiements', 'ordrepaiement'));
     }
 
     // public function show($id)

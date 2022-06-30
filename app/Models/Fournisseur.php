@@ -41,7 +41,7 @@ class Fournisseur extends Model
         return $this->belongsTo(Banque::class);
     }
 
-    public function detailop()
+    public function detailops()
     {
         return $this->hasMany(Detailop::class);
     }

@@ -53,7 +53,7 @@ class Etudiant extends Model
     return $this->hasMany(Bourse::class);
   }
 
-  public function detailop()
+  public function detailops()
   {
     return $this->hasMany(Detailop::class);
   }

@@ -87,7 +87,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label">Montant</label>
                                 <div class="col-lg-9">
-                                    <input type="number" class="form-control @error('montant_bord') is-invalid @enderror" name="montant_bord" value="{{ old('montant_bord') }}" required
+                                    <input type="number" min="0" class="form-control @error('montant_bord') is-invalid @enderror" name="montant_bord" value="{{ old('montant_bord') }}" required
                                     placeholder="Montant de bordéreau">
                                     @error('montant_bord')
                                         <span class="invalid-feedback" role="alert">

@@ -130,9 +130,11 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::resource('students', ImportationController::class);
     Route::post("simple-excel/export", [SimpleExcelController::class, 'export'])->name('excel.export');
     Route::post("simple-excel/exporti", [SimpleExcelController::class, 'inscitexport'])->name('excel.exporti');
-    Route::get("etudiants", [EtudiantController::class, 'payer'])->name('scolarites.payer');
-
-
+    
+    Route::get("simple-excel/importerop", [ImportationController::class, 'importerop'])->name('students.importerop');
+    Route::post("simple-excel/importerop", [ImportationController::class, 'postimporter'])->name('students.postImporter');
+    
+    
     Route::resource('etudiants', EtudiantController::class);
     Route::resource('inscriptions', InscriptionController::class);
     Route::resource('vacataires', VacataireController::class);

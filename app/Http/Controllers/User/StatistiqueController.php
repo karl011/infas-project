@@ -13,6 +13,8 @@ use App\Models\Vacataire;
 use App\Models\Inscription;
 use App\Models\Recouvrement;
 use App\Http\Controllers\Controller;
+use App\Models\Bordereau;
+use App\Models\Ordrepaiement;
 
 class StatistiqueController extends Controller
 {
@@ -26,6 +28,8 @@ class StatistiqueController extends Controller
         $vacations = Vacation::get();
         $reglements = Reglement::get();
         $recouvrements = Recouvrement::get();
+        $bordereaux = Bordereau::get();
+        $opaiements = Ordrepaiement::get();
 
         //Les variables utilisées pour calculer les montants
         $montantinscs = Inscription::get()->sum('mont_insc');
@@ -53,7 +57,9 @@ class StatistiqueController extends Controller
             'bourses',
             'mont_recouvrements',
             'mont_reglements',
-            'resultats'
+            'resultats',
+            'bordereaux',
+            'opaiements'
         ));
     }
 

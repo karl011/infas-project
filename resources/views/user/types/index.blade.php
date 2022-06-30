@@ -42,7 +42,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label">Montant d'inscription</label>
                                 <div class="col-lg-8">
-                                    <input type="number" class="form-control @error('montant_ins') is-invalid @enderror" name="montant_ins" value="{{ old('montant_ins') }}" required
+                                    <input type="number" min="0" class="form-control @error('montant_ins') is-invalid @enderror" name="montant_ins" value="{{ old('montant_ins') }}" required
                                     placeholder="Le montant d'inscription">
                                     @error('montant_ins')
                                         <span class="invalid-feedback" role="alert">
@@ -54,7 +54,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label">Montant de scolarité</label>
                                 <div class="col-lg-8">
-                                    <input type="number" class="form-control @error('montant_scol') is-invalid @enderror" name="montant_scol" value="{{ old('montant_scol') }}" required
+                                    <input type="number" min="0" class="form-control @error('montant_scol') is-invalid @enderror" name="montant_scol" value="{{ old('montant_scol') }}" required
                                     placeholder="Le montant de la scolarité">
                                     @error('montant_scol')
                                         <span class="invalid-feedback" role="alert">
@@ -66,7 +66,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label">Montant de la bourse</label>
                                 <div class="col-lg-8">
-                                    <input type="number" class="form-control @error('montant_bourse') is-invalid @enderror" name="montant_bourse" value="{{ old('montant_bourse') }}" required
+                                    <input type="number" min="0" class="form-control @error('montant_bourse') is-invalid @enderror" name="montant_bourse" value="{{ old('montant_bourse') }}" required
                                     placeholder="Le montant de la bourse">
                                     @error('montant_bourse')
                                         <span class="invalid-feedback" role="alert">

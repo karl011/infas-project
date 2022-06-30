@@ -200,9 +200,6 @@
                                 <div class="col-lg-6 offset-3">
                                     <div class="form-group row mt-2 justify-content-between">
                                         <button class="btn btn-success " type="submit">Enregistrer</button>
-                                        {{-- <button type="button" class="btn btn-danger btn-block"data-dismiss="modal">Fermer</button> --}}
-                                 
-                                        {{-- <button class="btn btn-success btn-block" type="submit">Enregistrer</button> --}}
                                         <button type="button" class="btn btn-danger "data-dismiss="modal">Fermer</button>
                                     </div>
                                 </div>

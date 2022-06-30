@@ -19,9 +19,9 @@ class InscriptionController extends Controller
     public function index()
     {
         $inscriptions = Inscription::get();
-        // $inscriptions = Inscription::where('antenne_id', auth()->user()->antenne->id)->get();
         $etudiants = Etudiant::all();
         $exercices = Exercice::all();
+        // $inscriptions = Inscription::where('antenne_id', auth()->user()->antenne->id)->get();
 
         return view('user.inscriptions.index', compact('inscriptions', 'etudiants', 'exercices'));
     }
@@ -31,8 +31,8 @@ class InscriptionController extends Controller
         $filieres = Filiere::all();
         $exercices = Exercice::all();
         $antennes = Antenne::all();
-        // $inscriptions =Inscription::all();
         $etudiants = Etudiant::get();
+        // $inscriptions =Inscription::all();
         // $etudiants = auth()->user()->antenne->etudiants()->get();
 
         return view('user.inscriptions.create', [
@@ -60,7 +60,6 @@ class InscriptionController extends Controller
             'statut' => ['required', 'string', 'max:5']
         ]);
 
-
         $inscriptionPrecedente = Inscription::where('etudiant_id', '=', $request->etudiant_id)->latest()->first();
         if ($inscriptionPrecedente != null) {
             if ($inscriptionPrecedente->exercice->exe_code >= Exercice::find($request->exercice_id)->exe_code) {
@@ -73,9 +72,6 @@ class InscriptionController extends Controller
                 return back()->with('toast_error', 'vous n\'êtes pas éligible à vous inscrire pour cause de scolarité.');
             }
         }
-
-
-
 
         $idinscription = Inscription::create($inscription)->id;
 
@@ -90,7 +86,7 @@ class InscriptionController extends Controller
 
         $inscriptions = Inscription::where('id', '=', $inscription)->get();
         $pdf = PDF::loadView('user.inscriptions.fiche', compact('inscriptions'));
-        return $pdf->download('Fiche d\'inscription'.'-'.date('m'.'Y'.'-'.'s'). '.pdf');
+        return $pdf->download('Fiche d\'inscription' . '-' . date('m' . 'Y' . '-' . 's') . '.pdf');
         // separe
         // return $pdf->stream(Str::slug($inscription->matricule) . '.pdf');
     }
@@ -177,27 +173,45 @@ class InscriptionController extends Controller
         return view('user.inscriptions.situation', compact('exercices', 'inscriptions', 'filieres'));
     }
 
-    public function searchSituation(Request $request) //Fonction de recherche des données  en fonction la valeur entréen en paramètre
+    public function searchSituation(Request $request) //Fonction de recherche des données  en fonction la valeur entrée en paramètre
     {
-        $matricule = $request->post('matricule_etd');
+        $search = $request->post('search');
+        $niveau_etud = $request->post('niveau_etud');
         $filiere = $request->post('filiere_id');
-        $exercices = Exercice::all();
         $exercice = $request->post('exercice_id');
-        if ($exercice == null) {
-            $exercice = Exercice::where('exe_statut', '=', 'O')->first()->id;
-        }
+        $antenne = $request->post('antenne_id');
+
 
         $inscriptions = [];
-        $etudiants = Etudiant::query()->orwhere('matricule_etd', 'like', "%{$matricule}%")->get();
-        $filieres = Filiere::query()->orwhere('id', 'like', "%{$filiere}%")->get();
+        $etudiants = Etudiant::where('matricule_etd', 'like', "%{$search}%")->orwhere('nom', 'like', "%{$search}%")
+            ->orwhere('prenoms', 'like', "%{$search}%")->get();
+        // dd($etudiants);
+        $filieres = Filiere::orwhere('id', 'like', "%{$filiere}%")->get();
+        $exercices = Exercice::orWhere('id', 'like', "%{$exercice}%")->get();
+        $antennes = Antenne::orWhere('id', 'like', "%{$antenne}%")->get();
 
         foreach ($etudiants as $etudiant) {
             foreach ($filieres as $filiere) {
-                $inscription = Inscription::where('exercice_id', '=', $exercice)->where('etudiant_id', '=', $etudiant->id)
-                    ->where('filiere_id', '=', $filiere->id)
-                    ->first();
-                if ($inscription != null) {
-                    $inscriptions[] = $inscription;
+                foreach ($exercices as $exercice) {
+                    foreach ($antennes as $antenne) {
+                        if ($niveau_etud == null) {
+                            $inscription = Inscription::where('exercice_id', '=', $exercice->id)
+                                ->where('etudiant_id', '=', $etudiant->id)
+                                ->where('filiere_id', '=', $filiere->id)
+                                ->where('antenne_id', '=', $antenne->id)
+                                ->first();
+                        } else {
+                            $inscription = Inscription::where('exercice_id', '=', $exercice->id)
+                                ->where('etudiant_id', '=', $etudiant->id)
+                                ->where('filiere_id', '=', $filiere->id)
+                                ->where('niveau_etud', 'like', "%{$niveau_etud}%")
+                                ->where('antenne_id', '=', $antenne->id)
+                                ->first();
+                        }
+                        if ($inscription != null) {
+                            $inscriptions[] = $inscription;
+                        }
+                    }
                 }
             }
         }
@@ -208,10 +222,14 @@ class InscriptionController extends Controller
 
     public function casSpecial(Request $request)
     {
-        foreach ($request->cas_special as $special) {
-            $inscription = Inscription::find($special);
-            $inscription->cas_special = true;
-            $inscription->save();
+        if ($request->cas_special != null) {
+            foreach ($request->cas_special as $special) {
+                $inscription = Inscription::find($special);
+                $inscription->cas_special = true;
+                $inscription->save();
+            }
+        } else {
+            return back()->with('info', 'Pour accordez une permission, cochez au moins une case.');
         }
         return back()->with('info', 'Permission d\'inscription accordée.');
     }

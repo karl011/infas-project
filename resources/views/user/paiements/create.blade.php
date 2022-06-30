@@ -12,7 +12,7 @@
     </div>
     @if($errors->any())
         @foreach($errors->all() as $error)
-        <div class="text-danger">{{ $error }}</div>
+        <div class="text-danger text-center">{{ $error }}</div>
         @endforeach
     @endif
     <div class="container">
@@ -50,7 +50,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label">M paiement</label>
                                 <div class="col-lg-9">
-                                    <input type="number" class="form-control @error('mont_ordre') is-invalid @enderror"
+                                    <input type="number" min="0" class="form-control @error('mont_ordre') is-invalid @enderror"
                                         name="mont_ordre" value="{{ old('mont_ordre') }}"
                                         placeholder="Montant de paiement">
                                     @error('mont_ordre')
@@ -80,24 +80,6 @@
                                         name="numero_liq" value="{{ old('numero_liq') }}"
                                         placeholder="Numéro liquidation">
                                     @error('numero_liq')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label">Fournisseur</label>
-                                <div class="col-lg-9">
-                                    <select
-                                        class="form-control custom-select @error('fournisseur_id') is-invalid @enderror"
-                                        name="fournisseur_id" value="{{ old('fournisseur_id') }}">
-                                        <option disabled selected>Fournisseur</option>
-                                        @foreach ($fournissseurs as $fournisseur)
-                                        <option value="{{ $fournisseur->id }}">{{ $fournisseur->nom_four }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('fournisseur_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

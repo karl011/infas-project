@@ -126,7 +126,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label">RIB</label>
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control @error('rib') is-invalid @enderror" name="rib" value="{{ $etudiants['rib'] }}" required
+                                    <input type="text" class="form-control @error('rib') is-invalid @enderror" name="rib" value="{{ $etudiants['rib'] }}"
                                     placeholder="Le rib dee l'étudiant">
                                     @error('rib')
                                         <span class="invalid-feedback" role="alert">

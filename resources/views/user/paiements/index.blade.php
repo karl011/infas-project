@@ -38,8 +38,8 @@
                                 <th>Fournisseur</th>
                                 <th>Exercice</th>
                                 <th>Objet</th>
-                                <th>Action</th>
-                                {{-- <th></th> --}}
+                                <th>Editer</th>
+                                <th>Plus</th>
                                 {{-- <th></th> --}}
                             </tr>
                         </thead>
@@ -54,7 +54,9 @@
                                 <td>{{ $ordrepaiement->objet }}</td>
                                 <td class="text-center" style="width: 10%">
                                     <a type="button" href="{{ route('paiements.edit', $ordrepaiement->id) }}" class="btn btn-success btn-sm">Modifier</a>
-                                    {{-- <a type="button" href="{{ route('paiements.show', $ordrepaiement->id) }}" class="btn btn-success btn-sm">Voir +</a> --}}
+                                </td>
+                                <td class="text-center" style="width: 10%">
+                                    <a type="button" href="{{ route('paiements.show', $ordrepaiement->id) }}" class="btn btn-primary btn-sm">Voir +</a>
                                 </td>
                             </tr>
                             @endforeach

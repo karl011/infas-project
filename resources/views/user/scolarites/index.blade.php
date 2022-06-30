@@ -12,9 +12,9 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Impression</a>
+        <div class="d-sm-flex align-items-center justify-content-end mb-4">
+            {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Impression</a> --}}
             <a href="#collapseExer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle="collapse"
                 role="button" aria-expanded="false" aria-controls="collapseExer"><i
                     class="fas fa-plus fa-sm text-white-50"></i>Nouvelle scolarité</a>
@@ -59,7 +59,7 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label">Versement</label>
                                         <div class="col-lg-9">
-                                            <input type="number" id="montantVerse" onblur="recalculateSum();"
+                                            <input type="number" min="0" id="montantVerse" onblur="recalculateSum();"
                                                 class="form-control @error('montant_vers') is-invalid @enderror"
                                                 name="montant_vers" value="{{ old('montant_vers') }}" required
                                                 placeholder="Montant versé">
@@ -88,7 +88,7 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label">Montant S</label>
                                         <div class="col-lg-9">
-                                            <input type="number" id="montantScol" readonly="readonly"
+                                            <input type="number" min="0" id="montantScol" readonly="readonly"
                                                 class="form-control @error('montant_scol') is-invalid @enderror"
                                                 name="montant_scol" value="{{ old('montant_scol') }}"
                                                 placeholder="Montant de scolarité">
@@ -102,7 +102,7 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label">Restant</label>
                                         <div class="col-lg-9">
-                                            <input type="number" readonly id="montantRestant"
+                                            <input type="number" min="0" readonly id="montantRestant"
                                                 class="form-control @error('montant_rest') is-invalid @enderror"
                                                 name="montant_rest" value="{{ old('montant_rest') }}"
                                                 placeholder="Montant de scolarité restant">

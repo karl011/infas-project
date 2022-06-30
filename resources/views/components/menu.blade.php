@@ -44,6 +44,7 @@
                 <a class="collapse-item" href="{{ route('stats.index') }}">Statistiques finales</a>
                 <a class="collapse-item" href="{{ route('students.create') }}">Importer ou exporter</a>
                 <a class="collapse-item" href="{{ route('inscriptions.situation') }}">Etats de synthèse</a>
+                <a class="collapse-item" href="{{ route('students.importerop') }}">Importer OP</a>
             </div>
         </div>
     </li>
@@ -76,6 +77,7 @@
                 <a class="collapse-item" href="{{ route('etudiants.create') }}">Nouvel étudiant</a>
                 <a class="collapse-item" href="{{ route('etudiants.index') }}">Liste étudiants</a>
                 <a class="collapse-item" href="{{ route('students.create') }}">Importer ou exporter</a>
+                <a class="collapse-item" href="{{ route('students.importerop') }}">Importer OP</a>
             </div>
         </div>
     </li>

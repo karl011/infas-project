@@ -34,7 +34,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label offset-1">Montant de la vacation</label>
                                     <div class="col-lg-6">
-                                        <input type="number" class="form-control @error('mont_vac') is-invalid @enderror"
+                                        <input type="number" min="0" class="form-control @error('mont_vac') is-invalid @enderror"
                                             name="mont_vac" value="{{ old('mont_vac') }}" required
                                             placeholder="Montant de la vacation">
                                         @error('mont_vac')

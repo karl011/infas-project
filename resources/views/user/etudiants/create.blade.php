@@ -125,18 +125,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">RIB</label>
-                                    <div class="col-lg-9">
-                                        <input type="text" class="form-control @error('rib') is-invalid @enderror"
-                                            name="rib" value="{{ old('rib') }}" placeholder="Le rib de l'étudiant" required>
-                                        @error('rib')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
+
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Nationalité</label>
                                     <div class="col-lg-9">{{-- custom-select --}}
@@ -187,9 +176,10 @@
                                         @enderror
                                     </div>
                                     <div class="col-lg-4">
-                                        <select class="form-control @error('boursier') is-invalid @enderror"
-                                            name="boursier" value="{{ old('boursier') }}">
-                                            <option disabled selected>Boursier ?</option>
+                                        <select id="boursier"
+                                            class="form-control @error('boursier') is-invalid @enderror" name="boursier"
+                                            value="{{ old('boursier') }}">
+                                            <option value=''>Boursier ?</option>
                                             <option value="OUI">Oui</option>
                                             <option value="NON">Non</option>
                                         </select>
@@ -200,6 +190,32 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div id="rib" class="form-group row">
+                                </div>
+                                <script>
+                                    document.getElementById('boursier').addEventListener('change', (function() {
+                                        if (this.value === 'OUI') {
+                                            document.getElementById('rib').innerHTML =
+                                                '<div class="col-lg-9">' +
+                                                '<label class="col-lg-3 col-form-label">RIB</label>' +
+                                                '<input type="text" class="form-control @error("rib") is-invalid @enderror" name="rib" value="{{ old("rib") }}" placeholder="Le rib de l\'étudiant" required>' +
+                                                '</div>'+
+                                                '@error("rib")<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror'
+                                        } else {
+                                            document.getElementById('rib').innerHTML = ''
+                                        }
+                                    }))
+                                </script>
+                                @if ($errors->has('rib'))
+                                    <script>
+                                         document.getElementById('rib').innerHTML =
+                                                '<div class="col-lg-9">' +
+                                                '<label class="col-lg-3 col-form-label">RIB</label>' +
+                                                '<input type="text" class="form-control @error("rib") is-invalid @enderror" name="rib" value="{{ old("rib") }}" placeholder="Le rib de l\'étudiant" required>' +
+                                                '</div>'+
+                                                '@error("rib")<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror'
+                                    </script>
+                                @endif
                                 <input type="hidden" name="statut" value="F1S">
                             </div>
                         </div>

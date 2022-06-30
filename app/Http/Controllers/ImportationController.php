@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Antenne;
-use App\Models\Etudiant;
-use App\Models\Filiere;
-use App\Models\Inscription;
 use App\Models\Type;
-
+use App\Models\Antenne;
+use App\Models\Filiere;
+use App\Models\Detailop;
+use App\Models\Etudiant;
+use App\Models\Inscription;
+use Illuminate\Http\Request;
+use App\Models\Ordrepaiement;
+use PhpParser\Node\Expr\FuncCall;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Spatie\SimpleExcel\SimpleExcelReader;
 
 
 class ImportationController extends Controller
 {
-    public function show()
-    {
-        // return view('user.students.create');
-    }
-
     public function create()
     {
         return view('user.students.create');
@@ -83,5 +81,48 @@ class ImportationController extends Controller
         });
         unlink($file);
         return back()->with('toast_success', 'Données chargées');
+    }
+
+    public function importerop()
+    {
+        return view('user.students.importerop');
+    }
+
+    public function postimporter(Request $request)
+    {
+        $file = $request->fichier->move(public_path(), $request->fichier->hashName());
+        SimpleExcelReader::create($file)->getRows()->each(function (array $rowsValue) {
+            $ordrepaiement = Ordrepaiement::firstOrCreate(
+                ['num_ordre' => $rowsValue['N° Mandat/OP']],
+                [
+                    'objet' => $rowsValue['Objet de la dépense'],
+                    'date_op' => date('Y-m-j'),
+                    'user_id' => Auth::user()->id,
+                    'bordereau_id' => 3,
+                    'exercice_id' => 1,
+                    'antenne_id' => 1,
+                ],
+            );
+            $ordrepaiement->mont_ordre += $rowsValue['Montant'];
+            $ordrepaiement->save();
+
+            $nom = strstr($rowsValue['Nom bénéficiaires'], ' ', true);
+            $prenoms = substr(strstr($rowsValue['Nom bénéficiaires'], ' '), 1);
+            $etudiant = Etudiant::where('nom', '=', $nom)
+                ->where('prenoms', '=', $prenoms)
+                ->first();
+            Detailop::create([
+                'ordrepaiement_id' => $ordrepaiement->id,
+                'etudiant_id' => $etudiant->id,
+                'dop_benef' => 'Etudiants',
+                'dop_mont' => $rowsValue['Montant'],
+                'dop_bqe_code' => $rowsValue['Code banque'],
+                'guichet' => $rowsValue['Code guichet'],
+                'num_cpte' => $rowsValue['Numero de compte'],
+                'rib' => $rowsValue['Clé RIB'],
+            ]);
+        });
+
+        return back()->with('toast_success', 'Ordre de paiement importé');
     }
 }

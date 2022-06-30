@@ -30,12 +30,15 @@ detailops
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label">N° de details</label>
+                                    <label class="col-lg-4 col-form-label">O paiement</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control @error('dop_num') is-invalid @enderror"
-                                            name="dop_num" value="{{ old('dop_num') }}" required
-                                            placeholder="Le numéro de deétail OP">
-                                        @error('dop_num')
+                                        <select class="form-control @error('ordrepaiement_id') is-invalid @enderror" name="ordrepaiement_id" value="{{ old('ordrepaiement_id') }}">
+                                            <option disabled selected>Ordre de paiement</option>
+                                            @foreach ($ordrepaiements as $ordrepaiement)
+                                            <option value="{{ $ordrepaiement->id }}">{{ $ordrepaiement->num_ordre}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('ordrepaiement_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -106,22 +109,6 @@ detailops
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">O paiement</label>
-                                    <div class="col-lg-9">
-                                        <select class="form-control @error('ordrepaiement_id') is-invalid @enderror" name="ordrepaiement_id" value="{{ old('ordrepaiement_id') }}">
-                                            <option disabled selected>Ordre de paiement</option>
-                                            @foreach ($ordrepaiements as $ordrepaiement)
-                                            <option value="{{ $ordrepaiement->id }}">{{ $ordrepaiement->num_ordre}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('ordrepaiement_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Objet</label>
                                     <div class="col-lg-9">
                                         <input type="text" class="form-control @error('dop_objet') is-invalid @enderror"
@@ -141,6 +128,32 @@ detailops
                                             name="dop_bqe_code" value="{{ old('dop_bqe_code') }}" required
                                             placeholder="Le code bancaire">
                                         @error('dop_bqe_code')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Guichet</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control @error('guichet') is-invalid @enderror"
+                                            name="guichet" value="{{ old('guichet') }}" required
+                                            placeholder="Le guichet">
+                                        @error('guichet')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">RIB</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control @error('rib') is-invalid @enderror"
+                                            name="rib" value="{{ old('rib') }}" required
+                                            placeholder="Le rib">
+                                        @error('rib')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

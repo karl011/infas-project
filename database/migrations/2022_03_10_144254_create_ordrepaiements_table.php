@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateOrdrepaiementsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('ordrepaiements', function (Blueprint $table) {
@@ -36,14 +31,13 @@ class CreateOrdrepaiementsTable extends Migration
             $table->string('motif_rej', 300)->nullable();
             $table->string('ordre_bord_numR', 20)->nullable();
             $table->string('ordre_num_annule', 20)->nullable();
-            $table->string('plc_gst',30)->nullable();
+            $table->string('plc_gst', 30)->nullable();
             $table->string('cpte_pec', 50)->nullable();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('fournisseur_id')->constrained()->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('exercice_id')->constrained()->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('bordereau_id')->constrained()->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('banque_id')->constrained()->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('antenne_id')->constrained()->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('user_id')->constrained()->nullable()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('exercice_id')->constrained()->nullable()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('bordereau_id')->constrained()->nullable()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('banque_id')->constrained()->nullable()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('antenne_id')->constrained()->nullable()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

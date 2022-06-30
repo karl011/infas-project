@@ -21,7 +21,7 @@ class CreateEtudiantsTable extends Migration
             $table->date('naissance');
             $table->string('lieu');
             $table->string('phone')->nullable();
-            $table->string('rib', 50);
+            $table->string('rib', 50)->nullable();
             $table->string('nationalite')->nullable();
             $table->string('sexe', 15)->nullable();
             $table->string('email')->nullable();
