@@ -18,7 +18,7 @@ class BourseController extends Controller
 {
     public function index()
     {
-        $etudiants = Etudiant::where('boursier','=','OUI')->get();
+        $etudiants = Etudiant::where('boursier', '=', 'OUI')->get();
         $bourses = Bourse::all();
         $antennes = Antenne::all();
         $ordrepaiements = Ordrepaiement::all();
@@ -35,17 +35,13 @@ class BourseController extends Controller
     public function store(Request $request)
     {
         $bourse = $request->validate([
-            // 'code' => ['required','string','max:10'],
-            // 'montant' => ['required','integer'],
-            // 'etudiant_id' => ['required','integer'],
-            'libelle' => ['required','string','max:255'],
-            'statut' => ['required','string','max:255'],
-            'antenne_id' => ['required','integer'],
-            'ordrepaiement_id' => ['required','integer'],
+            'libelle' => ['required', 'string', 'max:255'],
+            'statut' => ['required', 'string', 'max:255'],
+            'antenne_id' => ['required', 'integer'],
+            'ordrepaiement_id' => ['required', 'integer'],
         ]);
-
         Bourse::create($bourse);
-        
+
         return back()->with('toast_success', 'Bourse enregistrée avec succès');
     }
 
@@ -73,10 +69,10 @@ class BourseController extends Controller
     {
         if (Gate::allows('chef-comptable')) {
             # code...
-            $bourses = Bourse::where('antenne_id',auth()->user()->antenne->id)->where('statut','F1S')->get();
-        }else {
+            $bourses = Bourse::where('antenne_id', auth()->user()->antenne->id)->where('statut', 'F1S')->get();
+        } else {
             # code...
-            $bourses = Bourse::where('antenne_id',auth()->user()->antenne->id)->where('statut','F1V')->get();
+            $bourses = Bourse::where('antenne_id', auth()->user()->antenne->id)->where('statut', 'F1V')->get();
         }
         return view('user.bourses.validation', compact('bourses'));
     }
@@ -84,17 +80,16 @@ class BourseController extends Controller
     public function updateValidation(Request $request)
     {
         if ($request) {
-            foreach($request->bourses as $bourse)
-            {
+            foreach ($request->bourses as $bourse) {
                 if (Gate::allows('chef-comptable')) {
                     # code...
                     Bourse::find($bourse)->update(['statut' => 'F1V']);
-                }else {
+                } else {
                     # code...
                     Bourse::find($bourse)->update(['statut' => 'F2V']);
                 }
             }
         }
-        return redirect()->back()->with('toast_success','Bourse validée avec succès');
+        return redirect()->back()->with('toast_success', 'Bourse enregistrée avec succès');
     }
 }

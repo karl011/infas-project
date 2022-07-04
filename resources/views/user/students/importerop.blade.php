@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center text-light bg-dark">Importer un fichier excel d'ordre de paiement dans la base de données
+                    <div class="card-header text-center text-light bg-dark">Importer un fichier excel d'ordre de paiement.
                     </div>
                     <div class="card-body">
                         <form action="{{ route('students.postImporter') }}" method="post" enctype="multipart/form-data">

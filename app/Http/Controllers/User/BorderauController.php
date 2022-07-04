@@ -40,7 +40,7 @@ class BorderauController extends Controller
             'num_bord' => ['required', 'string', 'max:20'],
             'type_bord' => ['required', 'string', 'max:100'],
             'direction_bord' => ['required', 'string', 'max:100'],
-            'categorie_bord' => ['required', 'string', 'max:50'],
+            'categorie_bord' => ['required', 'string', 'nullable'],
             'montant_bord' => ['required', 'integer'],
             'date_trans_bord' => ['date'],
             'statut_bord' => ['required', 'string', 'max:3'],
@@ -74,11 +74,11 @@ class BorderauController extends Controller
         $bordereaus->type_bord =  $request->type_bord;
         $bordereaus->direction_bord = $request->direction_bord;
         $bordereaus->date_trans_bord = $request->date_trans_bord;
-        $bordereaus->categorie_bord = $request->categorie_bord;
         $bordereaus->montant_bord = $request->montant_bord;
         $bordereaus->statut_bord = $request->statut_bord;
         $bordereaus->user_id = $request->user_id;
         $bordereaus->antenne_id = $request->antenne_id;
+        // $bordereaus->categorie_bord = $request->categorie_bord;
 
         $bordereaus->save();
 

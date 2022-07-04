@@ -19,7 +19,7 @@ class CreateBordereausTable extends Migration
             $table->string('type_bord', 100);
             $table->string('direction_bord', 100);
             $table->date('date_trans_bord');
-            $table->string('categorie_bord', 50);
+            $table->string('categorie_bord')->nullable();
             $table->integer('montant_bord');
             $table->string('statut_bord', 3);
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');

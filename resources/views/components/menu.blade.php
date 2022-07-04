@@ -45,6 +45,7 @@
                 <a class="collapse-item" href="{{ route('students.create') }}">Importer ou exporter</a>
                 <a class="collapse-item" href="{{ route('inscriptions.situation') }}">Etats de synthèse</a>
                 <a class="collapse-item" href="{{ route('students.importerop') }}">Importer OP</a>
+                {{-- <a class="collapse-item" href="{{ route('etubanques.create') }}">Affectation E-B</a> --}}
             </div>
         </div>
     </li>
@@ -77,7 +78,6 @@
                 <a class="collapse-item" href="{{ route('etudiants.create') }}">Nouvel étudiant</a>
                 <a class="collapse-item" href="{{ route('etudiants.index') }}">Liste étudiants</a>
                 <a class="collapse-item" href="{{ route('students.create') }}">Importer ou exporter</a>
-                <a class="collapse-item" href="{{ route('students.importerop') }}">Importer OP</a>
             </div>
         </div>
     </li>
@@ -240,6 +240,56 @@
     </li>
 @endcanany
 
+@canany(['agent-saisie', 'chef-comptable', 'agent-comptable'])
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBordereaux"
+            aria-expanded="true" aria-controls="collapseBordereaux">
+            <i class="fas fa-money-bill"></i>
+            <span>Bordéreaux</span>
+        </a>
+        <div id="collapseBordereaux" class="collapse" aria-labelledby="headingBordereaux"
+            data-parent="#accordionSidebar">
+            <div class="bg-success py-2 collapse-inner rounded">
+                @can('agent-saisie')
+                    <a class="collapse-item" href="{{ route('bordereaux.create') }}">Nouveau bordereau</a>
+                    <a class="collapse-item" href="{{ route('bordereaux.index') }}">Liste des bordrereaux</a>
+                @endcan
+                @canany(['chef-comptable', 'agent-comptable'])
+                    <a class="collapse-item" href="{{ route('bordereaux.validation') }}">Validation de bordereaux</a>
+                @endcanany
+                @can('agent-comptable')
+                    {{-- <a class="collapse-item" href="{{ route('bordereaux.validation') }}">Etats de Synthèse bordéreau</a> --}}
+                @endcan
+            </div>
+        </div>
+    </li>
+@endcanany
+
+@canany(['agent-saisie', 'chef-comptable', 'agent-comptable'])
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaiements"
+            aria-expanded="true" aria-controls="collapsePaiements">
+            <i class="fas fa-money-bill"></i>
+            <span>Paiements</span>
+        </a>
+        <div id="collapsePaiements" class="collapse" aria-labelledby="headingPaiements" data-parent="#accordionSidebar">
+            <div class="bg-success py-2 collapse-inner rounded">
+                @can('agent-saisie')
+                    <a class="collapse-item" href="{{ route('paiements.create') }}">Nouveau paiement</a>
+                    <a class="collapse-item" href="{{ route('paiements.index') }}">Liste des paiements</a>
+                    <a class="collapse-item" href="{{ route('detailops.index') }}">Assignation bénéficiaire à OP</a>
+                    <a class="collapse-item" href="{{ route('students.importerop') }}">Importer OP</a>
+                @endcan
+                @canany(['chef-comptable', 'agent-comptable'])
+                    <a class="collapse-item" href="{{ route('paiements.validation') }}">Validation de paiement</a>
+                @endcanany
+                @can('agent-comptable')
+                    {{-- <a class="collapse-item" href="{{ route('paiements.validation') }}">Etats de Synthèse paiement</a> --}}
+                @endcan
+            </div>
+        </div>
+    </li>
+@endcanany
 <!-- Les données vues par tous les utilisateurs de la plate-forme -->
 @canany(['agent-saisie'])
     <!-- Nav Item - Dépenses Collapse Menu -->
@@ -281,30 +331,7 @@
 
 <!-- Les nouvelles tables -->
 
-@canany(['agent-saisie', 'chef-comptable', 'agent-comptable'])
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBordereaux"
-            aria-expanded="true" aria-controls="collapseBordereaux">
-            <i class="fas fa-money-bill"></i>
-            <span>Bordéreaux</span>
-        </a>
-        <div id="collapseBordereaux" class="collapse" aria-labelledby="headingBordereaux"
-            data-parent="#accordionSidebar">
-            <div class="bg-success py-2 collapse-inner rounded">
-                @can('agent-saisie')
-                    <a class="collapse-item" href="{{ route('bordereaux.create') }}">Nouveau bordéreau</a>
-                    <a class="collapse-item" href="{{ route('bordereaux.index') }}">Liste des bordréreaux</a>
-                @endcan
-                @canany(['chef-comptable', 'agent-comptable'])
-                    <a class="collapse-item" href="{{ route('bordereaux.validation') }}">Validation de bordereaux</a>
-                @endcanany
-                @can('agent-comptable')
-                    {{-- <a class="collapse-item" href="{{ route('bordereaux.validation') }}">Etats de Synthèse bordéreau</a> --}}
-                @endcan
-            </div>
-        </div>
-    </li>
-@endcanany
+
 
 @canany(['agent-saisie', 'chef-comptable', 'agent-comptable'])
     <li class="nav-item">
@@ -325,32 +352,6 @@
                 @endcanany
                 @can('agent-comptable')
                     {{-- <a class="collapse-item" href="{{ route('recettes.validation') }}">Etats de Synthèse recette</a> --}}
-                @endcan
-            </div>
-        </div>
-    </li>
-@endcanany
-
-@canany(['agent-saisie', 'chef-comptable', 'agent-comptable'])
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaiements"
-            aria-expanded="true" aria-controls="collapsePaiements">
-            <i class="fas fa-money-bill"></i>
-            <span>Paiements</span>
-        </a>
-        <div id="collapsePaiements" class="collapse" aria-labelledby="headingPaiements" data-parent="#accordionSidebar">
-            <div class="bg-success py-2 collapse-inner rounded">
-                @can('agent-saisie')
-                    <a class="collapse-item" href="{{ route('paiements.create') }}">Nouveau paiement</a>
-                    <a class="collapse-item" href="{{ route('paiements.index') }}">Liste des paiements</a>
-                    <a class="collapse-item" href="{{ route('detailops.index') }}">Liste détails des OP</a>
-                    <a class="collapse-item" href="{{ route('etubanques.create') }}">Affectation E-B</a>
-                @endcan
-                @canany(['chef-comptable', 'agent-comptable'])
-                    <a class="collapse-item" href="{{ route('paiements.validation') }}">Validation de paiement</a>
-                @endcanany
-                @can('agent-comptable')
-                    {{-- <a class="collapse-item" href="{{ route('paiements.validation') }}">Etats de Synthèse paiement</a> --}}
                 @endcan
             </div>
         </div>

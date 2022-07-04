@@ -73,18 +73,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label">Catégorie</label>
-                                <div class="col-lg-9">
-                                    <input type="text" class="form-control @error('categorie_bord') is-invalid @enderror" name="categorie_bord" value="{{ $bordereaus['categorie_bord']}}"
-                                    placeholder="Catégorie de bordéreau">
-                                    @error('categorie_bord')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-lg-3 col-form-label">Montant</label>
                                 <div class="col-lg-9">
                                     <input type="number" min="0" class="form-control @error('montant_bord') is-invalid @enderror" name="montant_bord" value="{{ $bordereaus['montant_bord'] }}"

@@ -102,7 +102,7 @@ class DetailopController extends Controller
             $detailop->vacataire_id = $request->benef_id;
             $detailop->save();
         }
-        return back()->with('toast_success', 'Détail de l\'OP enregistré avec succès');
+        return back()->with('toast_success', 'L\'assignation d\'un bénéficiaire à un ordrement de paiement effectée.');
     }
 
     public function edit($detailop)

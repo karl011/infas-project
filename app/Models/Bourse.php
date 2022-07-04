@@ -12,19 +12,12 @@ class Bourse extends Model
     use HasFactory;
 
     protected $fillable = [
-        // 'code',
-        // 'montant',
-        // 'etudiant_id',
         'libelle',
         'statut',
         'antenne_id',
         'ordrepaiement_id'
     ];
 
-    public function etudiant()
-    {
-        return $this->belongsTo(Etudiant::class);
-    }
     public function antennes()
     {
         return $this->belongsTo(Antenne::class);

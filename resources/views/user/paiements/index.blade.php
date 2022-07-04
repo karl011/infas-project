@@ -35,11 +35,11 @@
                                 <th>Numéro de paiement</th>
                                 <th>Montant de paiement</th>
                                 <th>Date de saisie</th>
-                                <th>Fournisseur</th>
                                 <th>Exercice</th>
                                 <th>Objet</th>
                                 <th>Editer</th>
                                 <th>Plus</th>
+                                {{-- <th>Fournisseur</th> --}}
                                 {{-- <th></th> --}}
                             </tr>
                         </thead>
@@ -49,9 +49,9 @@
                                 <td>{{ $ordrepaiement->num_ordre }}</td>
                                 <td>{{ $ordrepaiement->mont_ordre }}</td>
                                 <td>{{ $ordrepaiement->created_at }}</td>
-                                <td>{{ $ordrepaiement->fournisseur_id}}</td>
                                 <td>{{ $ordrepaiement->exercice->exe_code }}</td>
                                 <td>{{ $ordrepaiement->objet }}</td>
+                                {{-- <td>{{ $ordrepaiement->fournisseur_id}}</td> --}}
                                 <td class="text-center" style="width: 10%">
                                     <a type="button" href="{{ route('paiements.edit', $ordrepaiement->id) }}" class="btn btn-success btn-sm">Modifier</a>
                                 </td>

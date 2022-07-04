@@ -34,7 +34,6 @@
                                     <th>Direction de bordérau</th>
                                     <th>Montant du bordéreau</th>
                                     <th>Date de transmission</th>
-                                    <th>Catégorie de bordérau</th>
                                     <th>Action</th>
                                     <th></th>
                                 </tr>
@@ -47,14 +46,11 @@
                                         <td>{{ $bordereau->direction_bord }}</td>
                                         <td>{{ $bordereau->montant_bord }}</td>
                                         <td>{{ $bordereau->date_trans_bord }}</td>
-                                        <td>{{ $bordereau->categorie_bord }}</td>
                                         <td class="text-center" style="width: 10%">
-                                            <a type="button" href="{{ route('bordereaux.edit', $bordereau->id) }}"
-                                                class="btn btn-success  btn-sm">Editer</a>
+                                            <a type="button" href="{{ route('bordereaux.edit', $bordereau->id) }}" class="btn btn-success  btn-sm">Editer</a>
                                         </td>
                                         <td class="text-center" style="width: 10%">
-                                            <a type="button" href="{{ route('bordereaux.show', $bordereau->id) }}"
-                                                class="btn btn-primary  btn-sm">Voir plus</a>
+                                            <a type="button" href="{{ route('bordereaux.show', $bordereau->id) }}" class="btn btn-primary  btn-sm">Voir plus</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -13,13 +13,13 @@ detailops
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="d-sm-flex align-items-center justify-content-end mb-4">
+        {{-- <a href="#collapseExer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle="collapse"
+            role="button" aria-expanded="false" aria-controls="collapseExer"><i
+                class="fas fa-plus fa-sm text-white-50"></i> Imprimer</a> --}}
         <a href="#collapseExer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle="collapse"
             role="button" aria-expanded="false" aria-controls="collapseExer"><i
-                class="fas fa-plus fa-sm text-white-50"></i> Imprimer</a>
-        <a href="#collapseExer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle="collapse"
-            role="button" aria-expanded="false" aria-controls="collapseExer"><i
-                class="fas fa-plus fa-sm text-white-50"></i> Ajouter</a>
+                class="fas fa-plus fa-sm text-white-50"></i> Ajouter un bénéficiaire à un OP</a>
     </div>
     <div class="row">
         <div class="col-sm-10 offset-1">
@@ -202,30 +202,28 @@ detailops
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0" style="font-size: 0.8em;">
                     <thead class="thead-dark">
                         <tr>
-                            {{-- <th>N° du DOP</th> --}}
                             <th>N° de l'OP</th>
                             <th>Montant du DOP</th>
                             <th>Objet du DOP</th>
                             <th>Type</th>
-                            {{-- <th>Bénéficiaire</th> --}}
+                            <th>Bénéficiaire</th>
                             <th>Editer</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($detailops as $detailop)
                         <tr>
-                            {{-- <td>{{ $detailop->dop_num }}</td> --}}
                             <td>{{ $detailop->ordrepaiement->num_ordre }}</td>
                             <td>{{ $detailop->dop_mont }}</td>
                             <td>{{ $detailop->dop_objet }}</td>
                             <td>{{ $detailop->dop_benef }}</td>
-                            {{-- @if ($detailop->dop_benef == 'Vacataires')
-                                <td>{{App\Models\Vacataire::find($detailop->vacataire_id)->nom }}</td>
+                            @if ($detailop->dop_benef == 'Vacataires')
+                                <td>{{App\Models\Vacataire::find($detailop->vacataire_id)->nom }} {{App\Models\Vacataire::find($detailop->vacataire_id)->prenoms }}</td>
                             @elseif($detailop->dop_benef == 'Etudiants')
-                                <td>{{App\Models\Etudiant::find($detailop->etudiant_id)->nom}}</td>
+                                <td>{{App\Models\Etudiant::find($detailop->etudiant_id)->nom}} {{App\Models\Etudiant::find($detailop->etudiant_id)->prenoms}}</td>
                             @elseif($detailop->dop_benef == 'Fournisseurs')
                                 <td>{{App\Models\Fournisseur::find($detailop->fournisseur_id)->nom_four }}</td>
-                            @endif --}}
+                            @endif
                             <td class="text-right">
                                 <a type="button" href="{{ route('detailops.edit',$detailop->id) }}" class="btn btn-primary btn-sm">Mise à jour</a>
                             </td>

@@ -128,12 +128,6 @@ class OrdrepaiementController extends Controller
         return view('user.paiements.show', compact('ordrepaiements', 'ordrepaiement'));
     }
 
-    // public function show($id)
-    // {
-    //     $op = Ordrepaiement::find($id);
-    //     return view('user.paiements.show', compact('op'));
-    // }
-
     public function destroy(Ordrepaiement $ordrepaiement)
     {
         //

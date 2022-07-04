@@ -122,8 +122,7 @@
                     <div class="table-responsive">
                         <form action="{{ route('inscriptions.permission') }}" method="post">
                             @csrf
-                            <table class="table table-bordered table-striped" width="100%" cellspacing="0"
-                                style="font-size: 0.8em;">
+                            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0" style="font-size: 0.8em;">
                                 <thead class="thead-dark">
                                     <tr id="colonnes_tab">
                                         <th>Date Inscription</th>

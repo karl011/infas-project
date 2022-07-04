@@ -73,18 +73,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label">Catégorie</label>
-                                <div class="col-lg-9">
-                                    <input type="text" class="form-control @error('categorie_bord') is-invalid @enderror" name="categorie_bord" value="{{ old('categorie_bord') }}" required
-                                    placeholder="Catégorie de bordéreau">
-                                    @error('categorie_bord')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-lg-3 col-form-label">Montant</label>
                                 <div class="col-lg-9">
                                     <input type="number" min="0" class="form-control @error('montant_bord') is-invalid @enderror" name="montant_bord" value="{{ old('montant_bord') }}" required
@@ -96,6 +84,7 @@
                                     @enderror
                                 </div>
                             </div>
+                            <input type="hidden" name="categorie_bord" value="Bordereau de validation">
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="antenne_id" value="{{ auth()->user()->antenne->id }}">
                             <input type="hidden" name="statut_bord" value="F1S">

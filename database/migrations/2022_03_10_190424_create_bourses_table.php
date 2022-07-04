@@ -15,10 +15,7 @@ class CreateBoursesTable extends Migration
     {
         Schema::create('bourses', function (Blueprint $table) {
             $table->id();
-            // $table->string('code',50);
-            // $table->integer('montant');
-            // $table->foreignId('etudiant_id')->constrained();
-            $table->string('libelle',200);
+            $table->text('libelle');
             $table->string('statut',5);
             $table->foreignId('antenne_id')->constrained();
             $table->foreignId('ordrepaiement_id')->constrained();
